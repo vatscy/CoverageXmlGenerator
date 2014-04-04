@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CoverageXmlGenerator.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NotFound" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Not Found Coverage File.</Value>
+    </Setting>
+    <Setting Name="CoverageFileExtension" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.coverage</Value>
+    </Setting>
+    <Setting Name="Created" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Created Coverage Xml File: </Value>
+    </Setting>
+    <Setting Name="Found" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Found Coverage File: </Value>
+    </Setting>
+    <Setting Name="DefaultGeneratedFineName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">result.coveragexml</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

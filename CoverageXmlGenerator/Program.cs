@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using CoverageXmlGenerator.Properties;
 using Microsoft.VisualStudio.Coverage.Analysis;
 
 namespace CoverageXmlGenerator
@@ -9,33 +10,29 @@ namespace CoverageXmlGenerator
 	{
 		public static void Main(string[] args)
 		{
-			var dir = ".";
+			var searchRootPath = ".";
 			if (args.Length > 0)
 			{
-				dir = args[0];
+				searchRootPath = args[0];
 			}
 
 			try
 			{
-				var coverageFilePath = FindCoverageFile(dir);
-				Console.WriteLine("Found Coverage File: " + coverageFilePath);
+				var coverageFilePath = FindCoverageFile(searchRootPath);
+				Console.WriteLine(Settings.Default.Found + coverageFilePath);
 				using (var info = CoverageInfo.CreateFromFile(coverageFilePath, new string[] { }, new string[] { }))
 				{
 					var coverageDataSet = info.BuildDataSet();
-					var fileName = "result";
+					var generatedFileName = Settings.Default.DefaultGeneratedFineName;
 					if (args.Length > 1)
 					{
-						fileName = args[1];
+						generatedFileName = args[1];
 					}
-					coverageDataSet.WriteXml(fileName + ".coveragexml");
-					Console.WriteLine("Created Coverage Xml File: " + fileName + ".coveragexml");
+					coverageDataSet.WriteXml(generatedFileName);
+					Console.WriteLine(Settings.Default.Created + generatedFileName);
 				}
 			}
-			catch (FileNotFoundException e)
-			{
-				Console.WriteLine(e.Message);
-			}
-			catch (CoverageFileNotFoundException e)
+			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
 			}
@@ -53,7 +50,7 @@ namespace CoverageXmlGenerator
 				var files = Directory.GetFiles(d);
 				foreach (var file in files)
 				{
-					if (file.ToLower().EndsWith(".coverage"))
+					if (file.ToLower().EndsWith(Settings.Default.CoverageFileExtension))
 					{
 						return file;
 					}
@@ -65,7 +62,7 @@ namespace CoverageXmlGenerator
 					dirQueue.Enqueue(next);
 				}
 			}
-			throw new FileNotFoundException("Not Found Coverage File.");
+			throw new FileNotFoundException(Settings.Default.NotFound);
 		}
 	}
 }
