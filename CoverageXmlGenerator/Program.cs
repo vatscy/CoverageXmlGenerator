@@ -1,68 +1,33 @@
 ﻿using System;
-using System.Collections;
-using System.IO;
 using CoverageXmlGenerator.Properties;
-using Microsoft.VisualStudio.Coverage.Analysis;
 
 namespace CoverageXmlGenerator
 {
+	/// <summary>
+	/// 実行クラスです。
+	/// </summary>
 	public class Program
 	{
+		/// <summary>
+		/// 実行メソッドです。
+		/// </summary>
+		/// <param name="args"></param>
 		public static void Main(string[] args)
 		{
-			var searchRootPath = ".";
-			if (args.Length > 0)
-			{
-				searchRootPath = args[0];
-			}
-
 			try
 			{
-				var coverageFilePath = FindCoverageFile(searchRootPath);
+				var searchRootPath = args.Length > 0 ? args[0] : null;
+				var coverageFilePath = XmlGenerateLogic.FindCoverageFile(searchRootPath);
 				Console.WriteLine(Settings.Default.Found + coverageFilePath);
-				using (var info = CoverageInfo.CreateFromFile(coverageFilePath, new string[] { }, new string[] { }))
-				{
-					var coverageDataSet = info.BuildDataSet();
-					var generatedFileName = Settings.Default.DefaultGeneratedFineName;
-					if (args.Length > 1)
-					{
-						generatedFileName = args[1];
-					}
-					coverageDataSet.WriteXml(generatedFileName);
-					Console.WriteLine(Settings.Default.Created + generatedFileName);
-				}
+
+				var xmlFileName = args.Length > 1 ? args[1] : null;
+				var generatedFileName = XmlGenerateLogic.GenerateXml(coverageFilePath, xmlFileName);
+				Console.WriteLine(Settings.Default.Created + generatedFileName);
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
 			}
-		}
-
-		private static string FindCoverageFile(string dir)
-		{
-			var dirQueue = new Queue();
-			dirQueue.Enqueue(dir);
-
-			while (dirQueue.Count > 0)
-			{
-				var d = dirQueue.Dequeue() as string;
-
-				var files = Directory.GetFiles(d);
-				foreach (var file in files)
-				{
-					if (file.ToLower().EndsWith(Settings.Default.CoverageFileExtension))
-					{
-						return file;
-					}
-				}
-
-				var dirs = Directory.GetDirectories(d);
-				foreach (var next in dirs)
-				{
-					dirQueue.Enqueue(next);
-				}
-			}
-			throw new FileNotFoundException(Settings.Default.NotFound);
 		}
 	}
 }

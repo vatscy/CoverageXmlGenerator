@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoverageXmlGenerator", "CoverageXmlGenerator\CoverageXmlGenerator.csproj", "{6F3E98D4-A467-4F9A-B703-0EAE47093F75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoverageXmlGenerator.Tests", "CoverageXmlGenerator.Tests\CoverageXmlGenerator.Tests.csproj", "{1AA9788F-D8F7-41C9-8E71-624D87AFE786}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6F3E98D4-A467-4F9A-B703-0EAE47093F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F3E98D4-A467-4F9A-B703-0EAE47093F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F3E98D4-A467-4F9A-B703-0EAE47093F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AA9788F-D8F7-41C9-8E71-624D87AFE786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA9788F-D8F7-41C9-8E71-624D87AFE786}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA9788F-D8F7-41C9-8E71-624D87AFE786}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA9788F-D8F7-41C9-8E71-624D87AFE786}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
